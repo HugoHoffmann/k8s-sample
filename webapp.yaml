@@ -16,20 +16,20 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: nanajanashia/k8s-demo-app:1.0
+        image: nanajanashia/k8s-demo-app:v1.0
         ports:
         - containerPort: 3000
         env:
         - name: USER_NAME
           valueFrom:
-          secretKeyRef:
-            name: mongo-secret
-            value: mongo-user
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-user
         - name: USER_PWD
           valueFrom:
             secretKeyRef:
               name: mongo-secret
-              value: mongo-password
+              key: mongo-password
         - name: DB_URL
           valueFrom:
             configMapKeyRef:
@@ -46,6 +46,6 @@ spec:
     app: webapp
   ports:
   - protocol: TCP
-    port: 8080
+    port: 3000
     targetPort: 3000
     nodePort: 30100
